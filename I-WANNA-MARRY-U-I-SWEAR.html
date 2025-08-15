@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>i wanna marry u i swear</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: url('../tssawrena/burgerking.jpeg') no-repeat center center/cover;
+  position: relative;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: black;
+  opacity: 0;
+  animation: fadeInScene 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Fade in scene */
+@keyframes fadeInScene {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;       /* flex to place images side by side */
+  overflow: hidden;
+  z-index: 1000;
+}
+
+#scene img {
+  height: 100%;
+  width: 50%;         /* each image takes half */
+  object-fit: cover;
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.9), 0 0 30px rgba(255, 77, 109, 0.6);
+}
+
+
+/* Slide out using transform */
+.slide-left { transform: translateX(-100%) scale(1); opacity: 0; }
+.slide-right { transform: translateX(100%) scale(1); opacity: 0; }
+
+
+/* Video container - visible for testing */
+.video-container {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: floatVideo 5s ease-in-out infinite alternate;
+}
+
+/* Video appears when scene opens */
+.video-container.show {
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
+  animation: floatVideo 5s ease-in-out infinite alternate;
+}
+
+.video-container video {
+  width: 380px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 77, 109, 0.9), 0 0 60px rgba(255, 77, 109, 0.6);
+}
+
+@keyframes floatVideo {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Text under video - visible for testing */
+.video-text {
+  margin-top: 12px;
+  font-size: 28px;
+  font-weight: bolder;
+  text-align: center;
+  line-height: 1.4;
+  color: black;
+  text-shadow: 0 0 5px #ff9aa2, 0 0 10px #ffb3c1, 0 0 15px #ffd6da;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: glowText 3s ease-in-out infinite alternate;
+}
+
+/* Text appears when scene opens */
+.video-text.show {
+  opacity: 1;
+  transform: translateY(0);
+  animation: glowText 3s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+  0%, 100% { text-shadow: 0 0 5px #ff9aa2, 0 0 10px #ffb3c1, 0 0 15px #ffd6da; transform: translateY(0); }
+  50% { text-shadow: 0 0 15px #ff9aa2, 0 0 25px #ffb3c1, 0 0 35px #ffd6da; transform: translateY(-6px); }
+}
+.full-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../tssawrena/pink-heart-seamless-pattern-isolated-on-pink-background-illustration-pastel-color-vector.jpg') no-repeat center center/cover;
+  opacity: 0;
+  pointer-events: none; /* disables clicks when hidden */
+  transition: opacity 1s ease-in-out;
+  z-index: 2000; /* above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image is now set - no placeholder needed */
+
+/* Special number glow animation */
+@keyframes numberGlow {
+  0% {
+    box-shadow:
+      0 15px 40px rgba(255, 77, 109, 0.6),
+      0 0 0 3px rgba(255, 255, 255, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow:
+      0 20px 60px rgba(255, 77, 109, 0.8),
+      0 0 0 5px rgba(255, 255, 255, 0.4),
+      inset 0 0 30px rgba(255, 255, 255, 0.2),
+      0 0 40px rgba(255, 77, 109, 0.4);
+    text-shadow:
+      0 2px 10px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.full-image.show {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+}
+
+
+/* Floating hearts and butterflies */
+.floating {
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+  text-shadow: 0 0 12px rgba(0,0,0,0.5);
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+}
+
+/* Heart and butterfly colors */
+.heart { color: #ff3c6b; }
+.butterfly { color: #00cfff; }
+
+/* TAP ME Button - appears with scene opening */
+.tap-btn {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  z-index: 500;
+  background: linear-gradient(135deg, #ff4d6d, #ff6b8a);
+  color: white;
+  border: none;
+  padding: 18px 35px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-50px) scale(0.8);
+  box-shadow:
+    0 15px 40px rgba(255, 77, 109, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Button appears when scene opens */
+.tap-btn.show {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+  animation: buttonPulse 3s ease-in-out 0.5s infinite;
+}
+
+.tap-btn:hover {
+  transform: translateY(-50%) translateX(5px) scale(1.08);
+  box-shadow:
+    0 20px 50px rgba(255, 77, 109, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(255, 77, 109, 0.4);
+}
+
+.tap-btn:active {
+  transform: translateY(-50%) translateX(0) scale(0.95);
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow:
+      0 15px 40px rgba(255, 77, 109, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 20px 50px rgba(255, 77, 109, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 35px rgba(255, 77, 109, 0.5);
+  }
+}
+/* Random movement handled by JS */
+</style>
+</head>
+<body>
+<!-- Scene images -->
+<div id="scene">
+  <img src="../sceeneeffects/SCENEFFECT2.jpg" id="img1" alt="Left Image">
+  <img src="../sceeneeffects/SCENEFFECT1.jpg" id="img2" alt="Right Image">
+</div>
+
+<!-- Video top-right -->
+<div class="video-container">
+  <video controls autoplay loop muted playsinline preload="auto" style="background: #000;">
+    <source src="../videowatna/mall.mp4" type="video/mp4">
+    <source src="videowatna/mall.mp4" type="video/mp4">
+    <source src="mall.mp4" type="video/mp4">
+    <p style="color: red; font-size: 14px;">
+      ❌ Video cannot be loaded. Please check:<br>
+      1. File path: ../videowatna/mall.mp4<br>
+      2. File exists and is accessible<br>
+      3. File format is supported (MP4)
+    </p>
+  </video>
+  <div class="video-text">💖 I can't replace u or stop loving u 💙💧</div>
+</div>
+<!--
+  🎯 TO ADD YOUR PICTURE:
+  1. Go to line 114 in the CSS above
+  2. Replace 'PUT_YOUR_IMAGE_PATH_HERE.jpg' with your actual image path
+  3. Example: background: url('images/my-photo.jpg') no-repeat center center/cover;
+-->
+<!-- Full-page image placeholder -->
+<div id="fullImage" class="full-image" onclick="
+  var leftText = document.getElementById('leftText');
+  var rightText = document.getElementById('rightText');
+  var specialNumber = document.getElementById('specialNumber');
+
+  // Hide all elements with smooth animations
+  leftText.style.opacity = '0';
+  leftText.style.transform = 'translateY(-50%) translateX(-50px)';
+  rightText.style.opacity = '0';
+  rightText.style.transform = 'translateY(-50%) translateX(50px)';
+  specialNumber.style.opacity = '0';
+  specialNumber.style.transform = 'translateX(-50%) translateY(30px) scale(0.5)';
+
+  // Hide image after all elements
+  this.style.opacity = '0';
+  setTimeout(() => this.style.display = 'none', 800);
+" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('../tssawrena/pink-heart-seamless-pattern-isolated-on-pink-background-illustration-pastel-color-vector.jpg') no-repeat center center/cover; z-index: 9999; display: none; opacity: 0; cursor: pointer; transition: opacity 0.8s ease-in-out;">
+
+  <!-- Left text overlay -->
+  <div id="leftText" style="
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    max-width: 40%;
+    max-height: 80%;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-50%) translateX(-50px);
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  ">
+    <p style="margin: 0; font-family: 'Inter', sans-serif; font-weight: 400;">
+      I know drt bzzf dlhwayj li makidarush u ma3mry ghankun proud behum i hurted u sm u m3mr nyty kant hia baghe ghe 7ajty mnek u m3mrha ghatkun u earf 3titini evetything ur love ur trust ur time 3teteny kulshy but ana li khssrthum ana li mny lmushkil but in the end kanbghek
+    </p>
+  </div>
+
+  <!-- Right text overlay -->
+  <div id="rightText" style="
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    background: rgba(255, 77, 109, 0.9);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: right;
+    max-width: 40%;
+    max-height: 80%;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-50%) translateX(50px);
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 20px 60px rgba(255, 77, 109, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  ">
+    <p style="margin: 0; font-family: 'Inter', sans-serif; font-weight: 400;">
+      Kanbghek a intissar kter mn ayi 7aja ana earf hdrty katban lek l3kss dyal dkshy li drt u l3kss dyal ndra li wakhdaha elia mais ra wlh ta nyty hia nwsslu ldak nhar nshallah baghek l dak nhar a intissar brb baghek lshi 7aja kbera baghe nkml meak 7yate u nbny musstqbaly u mustqbalna bjuj mea b3diyatna u rah ghe bl3ql la jina nfkru b logique ra ta limagination dyal z3ma ana nder sh7al mn 7aja drtha meak ra makatdkhlsh l3qly ana kanbghek a intissar wlh kanbghek lbare7 u lyum u ghda u dima
+    </p>
+  </div>
+
+  <!-- Special number in the middle -->
+  <div id="specialNumber" style="
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff4d6d, #ff6b8a, #ffd6e0);
+    color: black;
+    padding: 25px 50px;
+    border-radius: 50px;
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px) scale(0.5);
+    transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow:
+      0 20px 50px rgba(255, 77, 109, 0.7),
+      0 0 0 4px rgba(255, 255, 255, 0.3),
+      inset 0 0 30px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: numberGlow 3s ease-in-out infinite alternate;
+  ">
+    986224
+  </div>
+</div>
+<!-- TAP ME Button -->
+<button class="tap-btn" id="tapButton" onclick="
+  var img = document.getElementById('fullImage');
+  var leftText = document.getElementById('leftText');
+  var rightText = document.getElementById('rightText');
+  var specialNumber = document.getElementById('specialNumber');
+
+  // Show image first
+  img.style.display = 'flex';
+  img.style.opacity = '1';
+  img.style.visibility = 'visible';
+
+  // Show left text first (slides in from left)
+  setTimeout(() => {
+    leftText.style.opacity = '1';
+    leftText.style.transform = 'translateY(-50%) translateX(0)';
+  }, 600);
+
+  // Show right text after left text (slides in from right)
+  setTimeout(() => {
+    rightText.style.opacity = '1';
+    rightText.style.transform = 'translateY(-50%) translateX(0)';
+  }, 1000);
+
+  // Show special number last with beautiful bounce effect
+  setTimeout(() => {
+    specialNumber.style.opacity = '1';
+    specialNumber.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+  }, 1500);
+" style="position: absolute; top: 50%; left: 50px; transform: translateY(-50%); z-index: 1000; background: linear-gradient(135deg, #ff4d6d, #ff6b8a); color: white; border: none; padding: 18px 35px; border-radius: 50px; font-size: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);">💝 TAP ME 💝</button>
+
+<script>
+// Smooth Scene Opening Controller
+class SmoothSceneController {
+  constructor() {
+    this.sceneOpened = false;
+    this.init();
+  }
+
+  init() {
+    this.setupSceneAnimation();
+    this.setupTapButton();
+  }
+
+  setupSceneAnimation() {
+    window.addEventListener('load', () => {
+      // Auto-open scene after 3 seconds
+      setTimeout(() => {
+        this.openScene();
+      }, 3000);
+    });
+  }
+  setupTapButton() {
+    const tapButton = document.getElementById('tapButton');
+    tapButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!this.sceneOpened) {
+        this.openScene();
+      } else {
+        // Button is now visible and can be used for special effects
+        this.handleTapAction();
+      }
+    });
+  }
+
+  handleTapAction() {
+    // Show the full-page image
+    const fullImage = document.getElementById('fullImage');
+    const tapButton = document.getElementById('tapButton');
+
+    if (fullImage) {
+      fullImage.classList.add('show');
+
+      // Optional: hide the TAP ME button
+      tapButton.style.opacity = '0';
+      tapButton.style.pointerEvents = 'none';
+
+      // Add click to close functionality
+      fullImage.addEventListener('click', () => {
+        fullImage.classList.remove('show');
+        tapButton.style.opacity = '1';
+        tapButton.style.pointerEvents = 'auto';
+      });
+    }
+  }
+
+  createSpecialFloating() {
+    const heart = document.createElement('div');
+    heart.className = 'floating heart';
+    heart.textContent = '💖';
+    heart.style.left = '50px';
+    heart.style.fontSize = '32px';
+    heart.style.animation = 'floatRandom 6s ease-out forwards';
+    heart.style.setProperty('--scaleStart', '1');
+    heart.style.setProperty('--scaleMid', '1.5');
+    heart.style.setProperty('--scaleEnd', '0.5');
+    heart.style.setProperty('--rotateDeg', '15deg');
+    heart.style.setProperty('--rotateEnd', '45deg');
+    heart.style.setProperty('--randomX', '200px');
+    heart.style.setProperty('--randomXEnd', '400px');
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  openScene() {
+    if (this.sceneOpened) return;
+
+    const img1 = document.getElementById('img1');
+    const img2 = document.getElementById('img2');
+    const videoContainer = document.querySelector('.video-container');
+    const videoText = document.querySelector('.video-text');
+    const tapButton = document.getElementById('tapButton');
+
+    // Slide images out
+    setTimeout(() => {
+      img1.classList.add('slide-left');
+    }, 0);
+
+    setTimeout(() => {
+      img2.classList.add('slide-right');
+    }, 200);
+
+    // Show video, text, and TAP ME button when background is revealed
+    setTimeout(() => {
+      videoContainer.classList.add('show');
+    }, 800);
+
+    setTimeout(() => {
+      videoText.classList.add('show');
+    }, 1000);
+
+    // Show TAP ME button on the left at the same time
+    setTimeout(() => {
+      tapButton.classList.add('show');
+    }, 900);
+
+    this.sceneOpened = true;
+  }
+}
+
+// Initialize controller
+document.addEventListener('DOMContentLoaded', () => {
+  new SmoothSceneController();
+});
+
+
+// Floating emojis function
+function createFloating(type) {
+  const emoji = document.createElement('div');
+  emoji.classList.add('floating', type);
+  emoji.style.left = Math.random() * window.innerWidth + 'px';
+  emoji.style.top = Math.random() * window.innerHeight + 'px';
+  const duration = 6 + Math.random() * 4;
+  emoji.style.animation = `floatRandom ${duration}s ease-in-out forwards`;
+  emoji.style.setProperty('--scaleStart', 0.8 + Math.random()*0.4);
+  emoji.style.setProperty('--scaleMid', 1 + Math.random()*0.4);
+  emoji.style.setProperty('--scaleEnd', 1.2 + Math.random()*0.5);
+  emoji.style.setProperty('--rotateDeg', (Math.random()*60-30)+'deg');
+  emoji.style.setProperty('--rotateEnd', (Math.random()*60-30)+'deg');
+  emoji.style.setProperty('--randomX', (Math.random()*100-50)+'px');
+  emoji.style.setProperty('--randomXEnd', (Math.random()*200-100)+'px');
+  emoji.textContent = type === 'heart' ? '❤️' : '🦋';
+  document.body.appendChild(emoji);
+  setTimeout(() => emoji.remove(), duration*1000);
+}
+
+// Spawn floating emojis continuously
+setInterval(() => {
+  createFloating('heart');
+  createFloating('butterfly');
+}, 500);
+
+// Floating animation keyframes
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes floatRandom {
+  0% { transform: translateY(100vh) translateX(0) scale(var(--scaleStart)) rotate(0deg); opacity:0; }
+  20% { opacity:1; }
+  50% { transform: translateY(50vh) translateX(var(--randomX)) scale(var(--scaleMid)) rotate(var(--rotateDeg)); opacity:0.9; }
+  100% { transform: translateY(-10vh) translateX(var(--randomXEnd)) scale(var(--scaleEnd)) rotate(var(--rotateEnd)); opacity:0; }
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
